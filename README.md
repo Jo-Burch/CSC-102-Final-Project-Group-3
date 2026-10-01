@@ -1,5 +1,5 @@
 # CSC-102-Final-Project-Group-3
-Final Project for CSC 102-1 Group 3 (Jo, Max, Hayden, Shawn)
+Final Project for CSC 102-1 Group 3 (Jo, Max, Hayden, Sean)
 beep
 boop
 meep
