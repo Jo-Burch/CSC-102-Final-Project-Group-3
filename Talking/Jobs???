@@ -62,5 +62,4 @@ Person 4 — Bomb & Wire Logic
 		Track which wires are cut
 		Detect win condition (all safe wires cut)
 		Detect fail condition (deadly wire cut)
-
-Reset bomb state
+		Reset bomb state
