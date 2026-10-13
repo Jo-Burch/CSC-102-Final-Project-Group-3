@@ -1,4 +1,4 @@
-Person 1 — Movement & Input System
+Maxx — Movement & Input System
   Core Responsibilities
     Implement switch‑based direction input
     Implement number‑pad distance input
@@ -14,7 +14,7 @@ Person 1 — Movement & Input System
     Handle out‑of‑bounds logic
     Integrate movement with quadrant detection
 
-Person 2 — Quadrant Engine
+Hayden — Quadrant Engine
   Core Responsibilities
     Manage quadrant states
     Handle entering/exiting quadrants
@@ -29,7 +29,7 @@ Person 2 — Quadrant Engine
     Trigger puzzle start/stop
     Notify game manager when a quadrant is solved
 
-Person 3 — Puzzle Developer (Quadrants 1–4)
+Jo — Puzzle Developer (Quadrants 1–4)
 	Core Responsibilities
 		Build all four quadrant puzzles
 		Ensure each puzzle follows the same interface
@@ -46,7 +46,7 @@ Person 3 — Puzzle Developer (Quadrants 1–4)
 		Ensure each puzzle returns True when solved
 		Balance difficulty across puzzles
 
-Person 4 — Bomb & Wire Logic
+Sean — Bomb & Wire Logic
 	Core Responsibilities
 		Manage wire objects
 		Unlock wires as quadrants are solved
