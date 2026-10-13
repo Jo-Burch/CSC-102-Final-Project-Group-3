@@ -1,0 +1,66 @@
+Person 1 — Movement & Input System
+  Core Responsibilities
+    Implement switch‑based direction input
+    Implement number‑pad distance input
+    Validate movement boundaries
+    Update player position
+    Provide movement API for other modules
+  Specific Tasks
+    Write read_switches()
+    Write read_number_pad()
+    Write calculate_new_position()
+    Write validate_movement()
+    Write move_player()
+    Handle out‑of‑bounds logic
+    Integrate movement with quadrant detection
+
+Person 2 — Quadrant Engine
+  Core Responsibilities
+    Manage quadrant states
+    Handle entering/exiting quadrants
+    Connect puzzles to the game manager
+    Track completion of each quadrant
+  Specific Tasks
+    Write QuadrantManager class
+    Create enter_quadrant()
+    Create update() loop
+    Store quadrant completion states
+    Reset all quadrants
+    Trigger puzzle start/stop
+    Notify game manager when a quadrant is solved
+
+Person 3 — Puzzle Developer (Quadrants 1–4)
+	Core Responsibilities
+		Build all four quadrant puzzles
+		Ensure each puzzle follows the same interface
+		Implement puzzle logic and state tracking
+	Specific Tasks
+		Write Puzzle class
+		Implement start(), update(), reset()
+	Create logic for:
+		Quadrant 1 puzzle
+		Quadrant 2 puzzle
+		Quadrant 3 puzzle
+		Quadrant 4 puzzle
+		Maintain puzzle state dictionaries
+		Ensure each puzzle returns True when solved
+		Balance difficulty across puzzles
+
+Person 4 — Bomb & Wire Logic
+	Core Responsibilities
+		Manage wire objects
+		Unlock wires as quadrants are solved
+		Handle safe vs deadly wire logic
+		Implement final 50/50 twist
+		Trigger win/lose conditions
+	Specific Tasks
+		Write Wire class
+		Write BombController class
+		Implement generate_safe_wires()
+		Implement unlock_next_wire()
+		Implement cut_wire()
+		Track which wires are cut
+		Detect win condition (all safe wires cut)
+		Detect fail condition (deadly wire cut)
+
+Reset bomb state
