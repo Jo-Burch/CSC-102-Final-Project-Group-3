@@ -1,0 +1,98 @@
+General Understanding
+1. What is the purpose of the PhaseThread class?
+PhaseThread is the parent class for the bomb’s phases and inherits from Python’s Thread class. It stores information each phase needs, such as its component, target value, and running, defused, or failed status. The other classes inherit this setup so their tasks can run alongside one another.
+Class-Specific Questions
+2. Explain the functionality of the Timer class. How do you pause and resume it?
+The Timer class controls the countdown, which starts at 300 seconds based on the configuration file. It displays the remaining time as minutes and seconds and decreases the value about once per second. Calling timer.pause() pauses the countdown, and calling it again resumes it.
+3. How does the Keypad class capture input and process it accurately?
+The Keypad class checks pressed_keys and records the first key in the list. It waits until the keys are released before adding the recorded key to the combination. This process uses short delays for debouncing, which helps prevent repeated entries from one press. A complete match defuses the phase, while an entry that no longer matches the beginning of the target causes a strike.
+4. How are the jumper wire values represented?
+The supplied Wires class is unfinished, so it does not yet create a binary string from the pins. Each pin reads True when its wire is connected and False when disconnected. These values can become a string of ones and zeros, with one digit representing each wire. For example, 10101 would mean wires 1, 3, and 5 are connected.
+The string can be converted to an integer for comparison. However, the target in bomb_configs.py uses 1 to mean a cut wire, so each pin value would need to be flipped before comparing it with that target.
+5. How does the Button class manage its state and RGB LED?
+The Button class reads its input pin to determine whether the button is pressed (True) or released (False). It remembers a press so it can check the conditions when the button is released. A correct release defuses the phase, while an incorrect release causes a strike.
+The LED displays the assigned red, green, or blue color. The code turns the selected color’s pin on by setting it to False and turns the other color pins off by setting them to True.
+Functionality and Flow
+6. What happens when the Timer’s pause method is called?
+The pause() method switches _paused between True and False. While paused, the timer waits instead of continuing its countdown, and the display blinks. Calling pause() again resumes the countdown and stops the blinking.
+7. What happens when the timer reaches zero?
+When the timer detects zero, it sets _running to False. The main program notices this in check_phases() and calls turn_off(). This stops the phase threads and turns off the seven-segment display and button LED. The program then opens the conclusion screen with the success argument set to False.
+Code Modification Challenges
+8. How did you add timer reset functionality?
+I saved the starting countdown value in _initial_value and added a reset() method. Calling timer.reset() restores that value and updates the display. To reset the timer from one minute to five minutes, the program can call timer.reset() when timer._value equals 60. The method provides the reset function; the one-minute trigger must be added where the timer is checked.
+9. How did you limit keypad input to the last four characters?
+After adding a key, the code uses [-4:] to keep only the last four characters entered. For example, entering 12345 leaves 2345. I changed the target codes to four digits and made the program wait until four characters are entered before checking for an incorrect combination. I also kept the input after a strike so each new character replaces the oldest one.
+10. How would the Status phase work?
+I added a Status class that inherits from PhaseThread and checks the five wire pins. I chose 00000, meaning all wires are disconnected, as the invalid combination. The class activates an on-screen ALARM when this combination is detected and shows OK otherwise.
+11. How would you count how many times the button has been pressed?
+I added a variable called _press_count that starts at zero. The counter increases when the button is pressed, but only if _pressed was previously False. This prevents holding the button down from adding extra counts. Releasing the button allows the next press to be counted.
+Collaboration and Group Dynamics
+12. How can your group divide the tasks and collaborate effectively?
+
+Below is our proposed division of workflows:
+Person 1 — Movement & Input System
+  Core Responsibilities
+    Implement switch‑based direction input
+    Implement number‑pad distance input
+    Validate movement boundaries
+    Update player position
+    Provide movement API for other modules
+  Specific Tasks
+    Write read_switches()
+    Write read_number_pad()
+    Write calculate_new_position()
+    Write validate_movement()
+    Write move_player()
+    Handle out‑of‑bounds logic
+    Integrate movement with quadrant detection
+
+Person 2 — Quadrant Engine
+  Core Responsibilities
+    Manage quadrant states
+    Handle entering/exiting quadrants
+    Connect puzzles to the game manager
+    Track completion of each quadrant
+  Specific Tasks
+    Write QuadrantManager class
+    Create enter_quadrant()
+    Create update() loop
+    Store quadrant completion states
+    Reset all quadrants
+    Trigger puzzle start/stop
+    Notify game manager when a quadrant is solved
+
+Person 3 — Puzzle Developer (Quadrants 1–4)
+	Core Responsibilities
+		Build all four quadrant puzzles
+		Ensure each puzzle follows the same interface
+		Implement puzzle logic and state tracking
+	Specific Tasks
+		Write Puzzle class
+		Implement start(), update(), reset()
+	Create logic for:
+		Quadrant 1 puzzle
+		Quadrant 2 puzzle
+		Quadrant 3 puzzle
+		Quadrant 4 puzzle
+		Maintain puzzle state dictionaries
+		Ensure each puzzle returns True when solved
+		Balance difficulty across puzzles
+
+Person 4 — Bomb & Wire Logic
+	Core Responsibilities
+		Manage wire objects
+		Unlock wires as quadrants are solved
+		Handle safe vs deadly wire logic
+		Implement final 50/50 twist
+		Trigger win/lose conditions
+	Specific Tasks
+		Write Wire class
+		Write BombController class
+		Implement generate_safe_wires()
+		Implement unlock_next_wire()
+		Implement cut_wire()
+		Track which wires are cut
+		Detect win condition (all safe wires cut)
+		Detect fail condition (deadly wire cut)
+
+Reset bomb state
