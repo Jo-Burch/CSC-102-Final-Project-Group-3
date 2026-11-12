@@ -1,19 +1,20 @@
-Jo — Puzzle Developer (Quadrants 1–4)
-	Core Responsibilities
-		Build all four quadrant puzzles
-		Ensure each puzzle follows the same interface
-		Implement puzzle logic and state tracking
-	Specific Tasks
-		Write Puzzle class
-		Implement start(), update(), reset()
-	Create logic for:
-		Quadrant 1 puzzle
-		Quadrant 2 puzzle
-		Quadrant 3 puzzle
-		Quadrant 4 puzzle
-		Maintain puzzle state dictionaries
-		Ensure each puzzle returns True when solved
-		Balance difficulty across puzzles
+#Jo — Puzzle Developer (Quadrants 1–4)
+#	Core Responsibilities
+#		Build all four quadrant puzzles
+#		Ensure each puzzle follows the same interface
+#		Implement puzzle logic and state tracking
+#	Specific Tasks
+#		Write Puzzle class
+#		Implement start(), update(), reset()
+#	Create logic for:
+#		Quadrant 1 puzzle
+#		Quadrant 2 puzzle
+#		Quadrant 3 puzzle
+#		Quadrant 4 puzzle
+#		Maintain puzzle state dictionaries
+#		Ensure each puzzle returns True when solved
+#		Balance difficulty across puzzles
 
 
-Class ()
+Class Puzzle(self):
+
